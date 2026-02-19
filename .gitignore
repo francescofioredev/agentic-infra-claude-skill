@@ -1,0 +1,8 @@
+# macOS
+.DS_Store
+
+# Local Claude Code settings (personal permissions, not for distribution)
+.claude/settings.local.json
+
+# Source PDF (copyrighted material — do not redistribute)
+docs/

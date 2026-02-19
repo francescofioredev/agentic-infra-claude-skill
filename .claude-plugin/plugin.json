@@ -1,0 +1,12 @@
+{
+  "name": "agentic-infra",
+  "version": "1.0.0",
+  "description": "Knowledge base for designing, reviewing, and linting agentic AI infrastructure. 21 pattern cards, 62-item review checklist, deterministic ADR linter.",
+  "author": {
+    "name": "Francesco Fiore"
+  },
+  "repository": "https://github.com/francescofiore/agentic-infra-claude-skill",
+  "license": "MIT",
+  "keywords": ["agentic", "ai", "architecture", "patterns", "design", "review", "lint"],
+  "skills": "./.claude/skills/"
+}

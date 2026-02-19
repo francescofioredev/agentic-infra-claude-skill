@@ -1,0 +1,21 @@
+{
+  "name": "agentic-infra-claude-skill",
+  "owner": {
+    "name": "Francesco Fiore"
+  },
+  "metadata": {
+    "description": "Claude Code skills for agentic AI infrastructure design and review"
+  },
+  "plugins": [
+    {
+      "name": "agentic-infra",
+      "source": ".",
+      "description": "Knowledge base for designing, reviewing, and linting agentic AI infrastructure. 21 pattern cards, 62-item review checklist, deterministic ADR linter.",
+      "version": "1.0.0",
+      "author": {
+        "name": "Francesco Fiore"
+      },
+      "license": "MIT"
+    }
+  ]
+}

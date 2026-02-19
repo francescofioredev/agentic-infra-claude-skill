@@ -1,0 +1,70 @@
+# taxonomy.yaml
+# Maps architectural concerns → relevant agentic patterns
+# Evidence: all page citations from "Agentic Design Patterns" PDF
+
+concerns:
+
+  reliability:
+    description: "Patterns that make agent behavior predictable, recoverable, and fault-tolerant"
+    patterns:
+      - prompt-chaining      # deterministic sequential steps (p. 1-20)
+      - exception-handling-recovery  # error triad + rollback (p. 201-220)
+      - hitl                 # escalation to human when uncertain (p. 207-220)
+      - guardrails-safety    # checkpoint + rollback (p. 285-301)
+      - goal-setting-monitoring  # iterative goal tracking (p. 183-200)
+
+  safety:
+    description: "Patterns that constrain agent actions, prevent misuse, and enforce policies"
+    patterns:
+      - guardrails-safety    # multi-layered defense, least-privilege (p. 285-301)
+      - hitl                 # human oversight and intervention (p. 207-220)
+      - tool-use             # tool permission scoping (p. 81-100)
+      - a2a-communication    # mTLS + OAuth2 between agents (p. 240-260)
+
+  memory:
+    description: "Patterns for state persistence across turns and sessions"
+    patterns:
+      - memory-management    # short/long-term, session/state/memory (p. 141-162)
+      - rag                  # external knowledge retrieval (p. 215-240)
+      - learning-adaptation  # behavior change from experience (p. 163-180)
+
+  tool-use:
+    description: "Patterns for connecting agents to external APIs, databases, and services"
+    patterns:
+      - tool-use             # function calling pipeline (p. 81-100)
+      - mcp                  # standardized tool protocol (p. 155-182)
+      - rag                  # retrieval as a tool pattern (p. 215-240)
+      - resource-aware-optimization  # dynamic model/tool selection (p. 255-275)
+
+  orchestration:
+    description: "Patterns for coordinating multiple agents or steps in a workflow"
+    patterns:
+      - prompt-chaining      # linear sequential (p. 1-20)
+      - routing              # conditional dispatch (p. 21-40)
+      - parallelization      # concurrent independent tasks (p. 41-60)
+      - planning             # goal decomposition (p. 101-120)
+      - multi-agent-collaboration  # specialized agent teams (p. 121-140)
+      - a2a-communication    # inter-agent messaging (p. 240-260)
+      - prioritization       # dynamic task ordering (p. 321-330)
+
+  observability:
+    description: "Patterns for monitoring, tracing, and understanding agent behavior"
+    patterns:
+      - evaluation-monitoring  # LLM-as-Judge, trajectory eval (p. 301-320)
+      - goal-setting-monitoring  # SMART goals + goals_met() check (p. 183-200)
+      - exception-handling-recovery  # error detection telemetry (p. 201-220)
+
+  eval:
+    description: "Patterns for measuring agent correctness and quality"
+    patterns:
+      - evaluation-monitoring  # accuracy, latency, token metrics (p. 301-320)
+      - reflection           # self-critique as quality signal (p. 61-80)
+      - exploration-discovery  # Elo-based ranking, tripartite review (p. 330-355)
+
+  cost:
+    description: "Patterns for reducing token consumption and compute cost"
+    patterns:
+      - resource-aware-optimization  # model switching, pruning (p. 255-275)
+      - parallelization      # latency reduction via concurrency (p. 41-60)
+      - reasoning-techniques  # chain-of-draft compression (p. 261-284)
+      - prompt-chaining      # bounded step costs vs. open-ended agent (p. 1-20)
