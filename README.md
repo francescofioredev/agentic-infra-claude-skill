@@ -13,7 +13,7 @@ A Claude Code skill for designing, reviewing, and linting agentic AI infrastruct
 ### Via npx (recommended)
 
 ```bash
-npx skills add francescofiore/agentic-infra-claude-skill
+npx skills add https://github.com/francescofioredev/agentic-infra-claude-skill --skill agentic-infra
 ```
 
 The CLI auto-detects your agent (Claude Code, Cursor, Codex, etc.) and installs the skill.
