@@ -129,6 +129,35 @@ Use this rubric to review an agentic system design. Each item maps to a pattern 
 
 ---
 
+## 8. Context Window Management
+
+- [ ] Is there a context compaction strategy for long-running or multi-file agents? (Pattern 22)
+- [ ] Is a high-water mark token threshold defined (e.g., 80% of model limit triggers compaction)? (Pattern 22)
+- [ ] Are critical elements pinned outside the compaction zone (system prompt, active task, open tool calls)? (Pattern 22)
+- [ ] Is the compaction summarizer instructed to preserve: facts, decisions, tool results, open questions? (Pattern 22)
+
+---
+
+## 9. Security — Sandboxed Execution & Injection Defense
+
+- [ ] Are tools executed with deny-by-default authorization (no tool callable unless explicitly granted)? (Pattern 29)
+- [ ] Are capability grants scoped to minimum necessary permissions (no wildcard scopes)? (Pattern 29)
+- [ ] Are capability tokens time-bounded with an explicit TTL? (Pattern 29)
+- [ ] Are secrets injected at runtime via env vars — never included in LLM context? (Pattern 29)
+- [ ] Is externally retrieved content treated as untrusted data (never re-prompted directly)? (Pattern 23)
+- [ ] If the agent touches untrusted data: is planning separated from execution (Plan-Then-Execute)? (Pattern 23)
+
+---
+
+## 10. UX & Autonomy Control
+
+- [ ] Is the agent's autonomy level explicitly defined (from the 5-level spectrum)? (Pattern 26)
+- [ ] Are irreversible actions (delete, send, publish) hard-floored at Level 1 (confirm-all), regardless of global level? (Pattern 26)
+- [ ] Is there a human override/stop mechanism callable mid-execution? (Pattern 26)
+- [ ] Are users notified of the current autonomy level in the interface? (Pattern 26)
+
+---
+
 ## Summary Scoring
 
 | Area | Items | Checked | Score |
@@ -140,9 +169,12 @@ Use this rubric to review an agentic system design. Each item maps to a pattern 
 | Evaluation & Observability | 9 | | /9 |
 | Failure Modes & Recovery | 7 | | /7 |
 | Cost Optimization | 4 | | /4 |
-| **Total** | **62** | | **/62** |
+| Context Window Management | 4 | | /4 |
+| Security — Sandboxed & Injection | 6 | | /6 |
+| UX & Autonomy Control | 4 | | /4 |
+| **Total** | **76** | | **/76** |
 
 **Interpretation:**
-- 55-62: Production-ready
-- 45-54: Significant gaps — address before deployment
-- <45: Major architectural concerns — redesign recommended
+- 68-76: Production-ready
+- 55-67: Significant gaps — address before deployment
+- <55: Major architectural concerns — redesign recommended

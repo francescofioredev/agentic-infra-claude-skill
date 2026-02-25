@@ -1,6 +1,6 @@
 # taxonomy.yaml
 # Maps architectural concerns → relevant agentic patterns
-# Evidence: all page citations from "Agentic Design Patterns" PDF
+# Evidence: PDF patterns cite page numbers; community patterns cite awesome-agentic-patterns
 
 concerns:
 
@@ -12,6 +12,7 @@ concerns:
       - hitl                 # escalation to human when uncertain (p. 207-220)
       - guardrails-safety    # checkpoint + rollback (p. 285-301)
       - goal-setting-monitoring  # iterative goal tracking (p. 183-200)
+      - llm-observability    # 30: tracing, cost, latency metrics
 
   safety:
     description: "Patterns that constrain agent actions, prevent misuse, and enforce policies"
@@ -20,6 +21,8 @@ concerns:
       - hitl                 # human oversight and intervention (p. 207-220)
       - tool-use             # tool permission scoping (p. 81-100)
       - a2a-communication    # mTLS + OAuth2 between agents (p. 240-260)
+      - sandboxed-authorization  # 29: deny-by-default tool execution
+      - plan-then-execute-secure  # 23: immutable plan before untrusted data
 
   memory:
     description: "Patterns for state persistence across turns and sessions"
@@ -27,6 +30,8 @@ concerns:
       - memory-management    # short/long-term, session/state/memory (p. 141-162)
       - rag                  # external knowledge retrieval (p. 215-240)
       - learning-adaptation  # behavior change from experience (p. 163-180)
+      - context-compaction   # 22: auto-compaction of context window overflow
+      - agentic-search       # 27: dynamic multi-step search without vector index
 
   tool-use:
     description: "Patterns for connecting agents to external APIs, databases, and services"
@@ -35,6 +40,8 @@ concerns:
       - mcp                  # standardized tool protocol (p. 155-182)
       - rag                  # retrieval as a tool pattern (p. 215-240)
       - resource-aware-optimization  # dynamic model/tool selection (p. 255-275)
+      - agentic-search       # 27: iterative search over heterogeneous tools
+      - sandboxed-authorization  # 29: tool execution security
 
   orchestration:
     description: "Patterns for coordinating multiple agents or steps in a workflow"
@@ -46,6 +53,9 @@ concerns:
       - multi-agent-collaboration  # specialized agent teams (p. 121-140)
       - a2a-communication    # inter-agent messaging (p. 240-260)
       - prioritization       # dynamic task ordering (p. 321-330)
+      - sub-agent-spawning   # 24: isolated child agents with scoped context
+      - dual-llm             # 25: separate reasoning and execution models
+      - plan-then-execute-secure  # 23: immutable plan before execution
 
   observability:
     description: "Patterns for monitoring, tracing, and understanding agent behavior"
@@ -53,6 +63,7 @@ concerns:
       - evaluation-monitoring  # LLM-as-Judge, trajectory eval (p. 301-320)
       - goal-setting-monitoring  # SMART goals + goals_met() check (p. 183-200)
       - exception-handling-recovery  # error detection telemetry (p. 201-220)
+      - llm-observability    # 30: distributed traces, cost/token metrics, structured logs
 
   eval:
     description: "Patterns for measuring agent correctness and quality"
@@ -60,6 +71,8 @@ concerns:
       - evaluation-monitoring  # accuracy, latency, token metrics (p. 301-320)
       - reflection           # self-critique as quality signal (p. 61-80)
       - exploration-discovery  # Elo-based ranking, tripartite review (p. 330-355)
+      - rlaif                # 28: AI feedback as training signal
+      - reflection-feedback-loop  # 31: structured iterative self-critique
 
   cost:
     description: "Patterns for reducing token consumption and compute cost"
@@ -68,3 +81,28 @@ concerns:
       - parallelization      # latency reduction via concurrency (p. 41-60)
       - reasoning-techniques  # chain-of-draft compression (p. 261-284)
       - prompt-chaining      # bounded step costs vs. open-ended agent (p. 1-20)
+      - context-compaction   # 22: reduce tokens via compaction before limit hit
+
+  ux-collaboration:
+    description: "Patterns for human-agent collaboration, autonomy spectrum, and UX design"
+    patterns:
+      - hitl                 # human-in-the-loop escalation (p. 207-220)
+      - spectrum-of-control  # 26: variable autonomy dial from manual to autonomous
+      - sub-agent-spawning   # 24: background agents free human from waiting
+      - goal-setting-monitoring  # communicating goal progress to users (p. 183-200)
+
+  feedback:
+    description: "Patterns for feedback loops, self-improvement, and iterative refinement"
+    patterns:
+      - reflection           # generator-critic loop (p. 61-80)
+      - reflection-feedback-loop  # 31: explicit loop with history persistence
+      - rlaif               # 28: AI feedback as training signal
+      - evaluation-monitoring  # LLM-as-Judge for quality measurement (p. 301-320)
+
+  context-management:
+    description: "Patterns for managing context windows, compaction, and relevant context injection"
+    patterns:
+      - memory-management    # short/long-term memory stores (p. 141-162)
+      - context-compaction   # 22: auto-compaction of context window
+      - rag                  # retrieval-augmented context injection (p. 215-240)
+      - agentic-search       # 27: dynamic search reduces need to keep content in context
