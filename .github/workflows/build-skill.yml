@@ -1,0 +1,41 @@
+name: Build Skill
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.claude/skills/agentic-infra/**'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Validate lint script
+        run: |
+          python3 .claude/skills/agentic-infra/scripts/lint_agentic_arch.py \
+            .claude/skills/agentic-infra/examples/design-example.md --format text || true
+
+      - name: Package skill
+        run: |
+          cd .claude/skills
+          zip -r ../../agentic-infra.skill agentic-infra/ -x '*.DS_Store'
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: agentic-infra.skill
+          path: agentic-infra.skill
+
+      - name: Commit updated skill file
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add agentic-infra.skill
+          git diff --cached --quiet && echo "No changes to commit" && exit 0
+          git commit -m "build: regenerate agentic-infra.skill"
+          git push
